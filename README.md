@@ -13,8 +13,8 @@ sudo /bin/bash scripts/recreate_databases.sh
 
 ## For developers:
 ### Requiremenets:
-Python >= 3.11
-RedDatabase >= 3.0.14
+- Python >= 3.11
+- RedDatabase >= 3.0.14
 
 ### Install requirements:
 ```bash

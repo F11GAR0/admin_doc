@@ -1,5 +1,5 @@
 import firebird.driver as driver
-from src.lib.crypt.hash import validate_password
+from src.lib.crypt.hash import validate_password, hash_password
 
 class Database:
 
@@ -37,6 +37,15 @@ class Database:
         self.cursor.execute(f"select * from users where id_user={id_user}")
         return self.cursor.fetchall()
 
+    def users_add_user(self, email, password_hash, first_name, last_name):
+
+        self.cursor.execute(f"insert into users (email, password_hash, first_name, last_name) values(?,?,?,?)", (email, password_hash, first_name, last_name))
+        self.connection.commit()
+    def users_delete_user(self, id_user):
+
+        self.cursor.execute(f"delete from users where id_user={id_user}")
+        self.connection.commit()
+        
     def devices_get_all(self):
 
         self.cursor.execute("select * from devices")
@@ -118,6 +127,23 @@ class Auth(object):
     def validate_login(self, login, password):
 
         return self.__validate_login_mock(login, password)
+
+    def __add_user(self, login, password, first_name, last_name):
+
+        if login is None:
+            raise AuthError("Please specify Email")
+        if password is None:
+            raise AuthError("Please specify Password")
+        if first_name is None:
+            raise AuthError("Please specify First name")
+        if last_name is None:
+            raise AuthError("Please specify Last name")
+        
+        database.users_add_user(login, hash_password(password), first_name, last_name)
+
+    def add_user(self, login, password, first_name, last_name):
+
+        return self.__add_user(login, password, first_name, last_name)
 
 auth = Auth()   
 
