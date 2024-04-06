@@ -2,51 +2,49 @@ import tkinter as tk
 from tkinter import messagebox, StringVar
 
 from src.gui.general_form import GeneralWindow
-from src.lib.rdb.model import Database
-from src.lib.crypt.hash import validate_password
+from src.lib.rdb.model import AuthError, auth
 
 class LoginWindow(object):
 
-    def __init__(self, database: Database):
+    def __init__(self):
 
         self.parent = tk.Tk()
+
+        self.login_box = tk.Frame(self.parent, width=100, height=50, background="gray", padx=5, pady=5)
+
         self.parent.title("Login to AdminDoc")
-        self.parent.geometry("100x50")
-        self.database = database
         
-        username_label = tk.Label(self.parent, text="Email:")
+        username_label = tk.Label(self.login_box, text="Email:", pady=3, background="gray")
         username_label.pack()
 
-        self.username_entry = tk.Entry(self.parent)
+        self.username_entry = tk.Entry(self.login_box)
         self.username_entry.pack()
 
-        password_label = tk.Label(self.parent, text="Пароль:")
+        password_label = tk.Label(self.login_box, text="Пароль:",pady=3, background="gray")
         password_label.pack()
 
-        self.password_entry = tk.Entry(self.parent, show="*")  # Show asterisks for password
+        self.password_entry = tk.Entry(self.login_box, show="*")  # Show asterisks for password
         self.password_entry.pack()
 
-        login_button = tk.Button(self.parent, text="Войти", command=self.validate_login)
+        login_button = tk.Button(self.login_box, text="Войти", command=self.validate_login, pady=3)
         login_button.pack()
 
         self.message = StringVar()
-        self.message_label = tk.Label(self.parent, textvariable=self.message)
+        self.message_label = tk.Label(self.login_box, textvariable=self.message, pady=3, background="gray")
         self.message_label.pack()
+
+        self.login_box.place(in_=self.parent, anchor="c", relx=.5, rely=.5)
 
 
     def validate_login(self):
 
-        user_id = self.database.users_get_id_by_email(self.username_entry.get())
-        user_password_hash = self.database.users_passwd_get_by_id(user_id)
-
-        if validate_password(self.password_entry.get(), user_password_hash):
-            
+        try:
+            auth.validate_login(self.username_entry.get(), self.password_entry.get())
             self.message.set("Success.")
 
             window = GeneralWindow()
             self.parent.destroy()
             self.parent = window.parent
-
-        else:
-
-            self.message.set("Wrong email or password. Try again.")
+        except AuthError as e:
+            self.message.set(e.__str__())
+    
