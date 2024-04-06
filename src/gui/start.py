@@ -1,6 +1,6 @@
 from src.gui.login_form import LoginWindow
 
-def start(database):
+def start():
 
-    login_window = LoginWindow(database)
+    login_window = LoginWindow()
     login_window.parent.mainloop()

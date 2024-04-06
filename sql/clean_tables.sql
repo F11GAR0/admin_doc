@@ -1,3 +1,5 @@
+connect 'admindoc' user sysdba password 'masterkey';
+
 delete from user_permissions where id_permission > 0;
 delete from user_services where id_user_services > 0;
 delete from user_devices where id_user_devices > 0;
