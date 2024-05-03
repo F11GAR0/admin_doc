@@ -4,10 +4,6 @@ from firebird import driver
 
 class TestDatabase:
 
-    def __init__(self):
-
-        pass
-
     @staticmethod
     def connect_and_execute(query):
 
