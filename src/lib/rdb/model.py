@@ -10,6 +10,9 @@ class Database:
 
     def __del__(self):
 
+        if self.cursor:
+            self.cursor.close()
+
         if self.connection:
             self.connection.close()
 
@@ -59,6 +62,11 @@ class Database:
     def roles_get_all(self):
 
         self.cursor.execute("select * from roles")
+        return self.cursor.fetchall()
+
+    def roles_get_by_user(self, id_user):
+
+        self.cursor.execute(f"select roles.id_role, roles.alias, roles.role_content from user_permissions right join roles on user_permissions.id_role=roles.id_role where id_user={id_user};")
         return self.cursor.fetchall()
 
     def services_get_all(self):
