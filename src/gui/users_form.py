@@ -45,11 +45,10 @@ class AddUserForm(object):
                         self.last_name_textbox.get())
             self.root.destroy()
         except AuthError as e:
-            self.message.set(e.__str__())
+            self.message.set(str(e))
 
-        
 
-class UsersForm(object):
+class UsersForm():
 
     def __init__(self, parent):
 
@@ -89,15 +88,15 @@ class UsersForm(object):
     def delete_user(self):
 
         row = self.table.get_currently_selected().row
-        id = self.table.get_cell_data(row, 0)
-        database.users_delete_user(id)
+        user_id = self.table.get_cell_data(row, 0)
+        database.users_delete_user(user_id)
         self.update_data()
 
     def add_user(self):
 
         add_user = AddUserForm(self.root)
         add_user.root.bind("<Destroy>", self.update_data)
-        
+
     def update_data(self, event=None):
 
         self.table.set_sheet_data(data=database.users_get_all())
