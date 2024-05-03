@@ -1,6 +1,11 @@
+#!/bin/bash
 mkdir /var/lib/rdb
+mkdir /tmp/firebird
 chown firebird:firebird -R /var/lib/rdb
 chmod 660 -R /var/lib/rdb
+chmod 777 -R /tmp/firebird
+chown firebird:firebird -R /tmp/firebird
+chmod +x scripts/*.sh
 if grep -q 'admindoc' /opt/RedDatabase/databases.conf; then
 	echo 'Config already configurated'
 else

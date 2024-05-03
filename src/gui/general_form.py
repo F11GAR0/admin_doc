@@ -2,8 +2,9 @@ import tkinter as tk
 from tkinter import ttk, messagebox
 
 from src.gui.users_form import UsersForm
+from src.gui.roles_form import RolesForm
 
-class GeneralWindow(object):
+class GeneralWindow():
 
     def __init__(self):
 
@@ -22,5 +23,6 @@ class GeneralWindow(object):
         tabs.add(tab_services, text='Сервисы')
 
         self.tab_users_content = UsersForm(tab_users)
+        self.tab_roles_content = RolesForm(tab_roles)
 
         tabs.pack(expand=1, fill="both")

@@ -1,0 +1,15 @@
+[MAIN]
+IGNORE=venv,__pycache__
+persistent=yes
+jobs=0
+
+[MESSAGES CONTROL]
+disable=
+    attribute-defined-outside-init,
+    invalid-name,
+    missing-docstring,
+    protected-access,
+    too-few-public-methods,
+    too-many-instance-attributes,
+    format,
+    fixme
