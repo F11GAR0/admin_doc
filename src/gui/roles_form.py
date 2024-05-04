@@ -164,8 +164,8 @@ class RolesForm():
 
                 return
 
-        add_user = AddUserPermissionForm(self.root, user_id)
-        add_user.root.bind("<Destroy>", self.update_roles)
+        add_user_permission_form = AddUserPermissionForm(self.root, user_id)
+        add_user_permission_form.root.bind("<Destroy>", self.update_roles)
 
     def del_user_permission(self):
 
@@ -184,8 +184,6 @@ class RolesForm():
             if (user_id := self.last_selected_user_id) is None:
 
                 return
-
-        print(f"uid: {user_id} | rid: {role_id}")
 
         database.roles_del_from_user(user_id, role_id)
 

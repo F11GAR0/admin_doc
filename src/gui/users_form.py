@@ -56,7 +56,7 @@ class UsersForm():
         self.root = tk.Frame(self.parent, background="gray", padx=5, pady=15)
 
         self.table = tksheet.Sheet(self.root, "Список пользователей")
-        self.table.headers("Info", 5)
+        self.table.headers("Initial", 4)
         self.table.headers()[0] = "Идентификатор"
         self.table.headers()[1] = "Email"
         self.table.headers()[2] = "Хэш пароля"
