@@ -3,6 +3,7 @@ from tkinter import ttk
 
 from src.gui.users_form import UsersForm
 from src.gui.roles_form import RolesForm
+from src.gui.devices_form import DevicesForm
 
 class GeneralWindow():
 
@@ -24,5 +25,11 @@ class GeneralWindow():
 
         self.tab_users_content = UsersForm(tab_users)
         self.tab_roles_content = RolesForm(tab_roles)
-        tabs.bind('<<NotebookTabChanged>>', self.tab_roles_content.update_users)
+        self.tab_devices_content = DevicesForm(tab_devices)
+        tabs.bind('<<NotebookTabChanged>>', self._update_tabs)
         tabs.pack(expand=1, fill="both")
+
+    def _update_tabs(self, event=None):
+
+        self.tab_roles_content.update_users()
+        self.tab_devices_content.update_users()

@@ -60,6 +60,26 @@ class Database:
         self.cursor.execute(f"select * from devices where id_device={id_device}")
         return self.cursor.fetchall()
 
+    def devices_add_device(self, alias, ipv4, ipv6, fqdn):
+
+        self.cursor.execute("insert into devices (alias, ipv4, ipv6, fqdn) values(?,?,?,?)",
+                            (alias, ipv4, ipv6, fqdn))
+        self.connection.commit()
+
+    def devices_delele_device(self, id_device):
+
+        self.cursor.execute(f"delete from devices where id_device={id_device}")
+        self.connection.commit()
+
+    def devices_update_device(self, id_device, **kwargs):
+
+        for key, value in kwargs.items():
+            
+            value_refactored = f"'{value}'" if isinstance(value, str) else value
+
+            self.cursor.execute(f"update devices set {key}={value_refactored} where id_device={id_device}")
+            self.connection.commit()
+
     def roles_get_all(self):
 
         self.cursor.execute("select * from roles")
@@ -101,12 +121,16 @@ class Database:
 
     def roles_get_by_user(self, id_user):
 
-        self.cursor.execute(f"select roles.id_role, roles.alias, roles.role_content from user_permissions right join roles on user_permissions.id_role=roles.id_role where id_user={id_user};")
+        self.cursor.execute(f"select roles.id_role, roles.alias, roles.role_content \
+                              from user_permissions right join roles on user_permissions.id_role=roles.id_role \
+                              where id_user={id_user};")
         return self.cursor.fetchall()
 
     def roles_is_assigned_to_user(self, id_user, id_role):
 
-        self.cursor.execute(f"select roles.id_role from user_permissions right join roles on user_permissions.id_role=roles.id_role where id_user={id_user} and roles.id_role={id_role}")
+        self.cursor.execute(f"select roles.id_role \
+                              from user_permissions right join roles on user_permissions.id_role=roles.id_role \
+                              where id_user={id_user} and roles.id_role={id_role}")
         return len(self.cursor.fetchall()) > 0
 
     def roles_add_to_user(self, id_user, id_role):
@@ -124,6 +148,45 @@ class Database:
 
             self.cursor.execute(f"delete from user_permissions where id_user={id_user} and id_role={id_role}")
             self.connection.commit()
+
+    def devices_get_by_user(self, id_user):
+
+        self.cursor.execute(f"select devices.id_device, devices.alias, devices.ipv4, devices.ipv6, devices.fqdn \
+                              from user_devices right join devices on user_devices.id_device=devices.id_device \
+                              where id_user={id_user}")
+        return self.cursor.fetchall()
+
+    def devices_is_assigned_to_user(self, id_user, id_device):
+
+        self.cursor.execute(f"select devices.id_device \
+                              from user_devices right join devices on user_devices.id_device=devices.id_device \
+                              where id_user={id_user} and devices.id_device={id_device}")
+        return len(self.cursor.fetchall()) > 0
+
+
+    def devices_get_by_alias(self, alias):
+
+        self.cursor.execute(f"select devices.id_device \
+                              from user_devices right join devices on user_devices.id_device=devices.id_device \
+                              where devices.alias='{alias}'")
+        return self.cursor.fetchall()
+
+    def devices_add_to_user(self, id_user, id_device):
+
+        if self.devices_is_assigned_to_user(id_user, id_device):
+            
+            return
+        
+        self.cursor.execute("insert into user_devices (id_user,id_device) values(?,?)", (id_user, id_device))
+        self.connection.commit()
+
+    def devices_del_from_user(self, id_user, id_device):
+
+        if self.devices_is_assigned_to_user(id_user, id_device):
+
+            self.cursor.execute(f"delete from user_devices where id_user={id_user} and id_device={id_device}")
+            self.connection.commit()
+
 
 
 database = Database()
