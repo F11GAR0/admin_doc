@@ -1,5 +1,5 @@
 import tkinter as tk
-from tkinter import messagebox, StringVar
+from tkinter import StringVar
 
 from src.gui.general_form import GeneralWindow
 from src.lib.rdb.model import AuthError, auth

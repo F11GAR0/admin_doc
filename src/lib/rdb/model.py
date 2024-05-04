@@ -10,6 +10,9 @@ class Database:
 
     def __del__(self):
 
+        if self.cursor:
+            self.cursor.close()
+
         if self.connection:
             self.connection.close()
 
@@ -41,6 +44,7 @@ class Database:
 
         self.cursor.execute("insert into users (email, password_hash, first_name, last_name) values(?,?,?,?)", (email, password_hash, first_name, last_name))
         self.connection.commit()
+
     def users_delete_user(self, id_user):
 
         self.cursor.execute(f"delete from users where id_user={id_user}")
@@ -59,6 +63,11 @@ class Database:
     def roles_get_all(self):
 
         self.cursor.execute("select * from roles")
+        return self.cursor.fetchall()
+
+    def roles_get_by_alias(self, alias):
+
+        self.cursor.execute(f"select * from roles where alias='{alias}'")
         return self.cursor.fetchall()
 
     def services_get_all(self):
@@ -88,7 +97,37 @@ class Database:
         self.cursor.execute("select * from user_services")
         return self.cursor.fetchall()
 
+    # Many to Many by something
+
+    def roles_get_by_user(self, id_user):
+
+        self.cursor.execute(f"select roles.id_role, roles.alias, roles.role_content from user_permissions right join roles on user_permissions.id_role=roles.id_role where id_user={id_user};")
+        return self.cursor.fetchall()
+
+    def roles_is_assigned_to_user(self, id_user, id_role):
+
+        self.cursor.execute(f"select roles.id_role from user_permissions right join roles on user_permissions.id_role=roles.id_role where id_user={id_user} and roles.id_role={id_role}")
+        return len(self.cursor.fetchall()) > 0
+
+    def roles_add_to_user(self, id_user, id_role):
+
+        if self.roles_is_assigned_to_user(id_user, id_role):
+            
+            return
+        
+        self.cursor.execute("insert into user_permissions (id_user,id_role) values(?,?)", (id_user, id_role))
+        self.connection.commit()
+
+    def roles_del_from_user(self, id_user, id_role):
+
+        if self.roles_is_assigned_to_user(id_user, id_role):
+
+            self.cursor.execute(f"delete from user_permissions where id_user={id_user} and id_role={id_role}")
+            self.connection.commit()
+
+
 database = Database()
+
 
 class AuthError(Exception):
 

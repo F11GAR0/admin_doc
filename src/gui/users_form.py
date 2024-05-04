@@ -1,10 +1,9 @@
 import tkinter as tk
 import tksheet
-from tkinter import ttk, messagebox
 
 from src.lib.rdb.model import AuthError, database, auth
 
-class AddUserForm(object):
+class AddUserForm():
 
     def __init__(self, parent):
 

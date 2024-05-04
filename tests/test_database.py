@@ -7,13 +7,13 @@ class TestDatabase:
     @staticmethod
     def connect_and_execute(query):
 
-        con = driver.connect('admindoc', user='sysdba', password='masterkey')
+        with driver.connect('admindoc', user='sysdba', password='masterkey') as con:
 
-        cur = con.cursor()
+            cur = con.cursor()
+            cur.execute(query)
+            ret = cur.fetchall()
 
-        cur.execute(query)
-
-        return cur.fetchall()
+            return ret
 
     @pytest.mark.xfail
     def test_clean_database(self):
