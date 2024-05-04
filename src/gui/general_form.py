@@ -24,5 +24,5 @@ class GeneralWindow():
 
         self.tab_users_content = UsersForm(tab_users)
         self.tab_roles_content = RolesForm(tab_roles)
-
+        tabs.bind('<<NotebookTabChanged>>', self.tab_roles_content.update_users)
         tabs.pack(expand=1, fill="both")
