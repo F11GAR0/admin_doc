@@ -1,6 +1,6 @@
 import tkinter as tk 
 
-from src.lib.rdb.model import AuthError, database, auth
+from src.lib.rdb.model import database
 
 
 class AddUserPermissionForm():
@@ -109,7 +109,7 @@ class RolesForm():
     def _get_selected_role_id(self):
 
         if not hasattr(self, "roles_list"):
-            return
+            return None
 
         selection = self.roles_list.curselection()
 
