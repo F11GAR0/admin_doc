@@ -10,10 +10,10 @@ class Database:
 
     def __del__(self):
 
-        if self.cursor:
+        if hasattr(self, "cursor") and self.cursor:
             self.cursor.close()
 
-        if self.connection:
+        if hasattr(self, "connection") and self.connection:
             self.connection.close()
 
     def users_passwd_get_by_id(self, id_user):
@@ -78,6 +78,31 @@ class Database:
             value_refactored = f"'{value}'" if isinstance(value, str) else value
 
             self.cursor.execute(f"update devices set {key}={value_refactored} where id_device={id_device}")
+            self.connection.commit()
+
+    def services_get_by_id(self, id_service):
+
+        self.cursor.execute(f"select * from services where id_service={id_service}")
+        return self.cursor.fetchall()
+
+    def services_add_service(self, alias, fqdn):
+
+        self.cursor.execute("insert into services (alias, fqdn) values(?,?)",
+                            (alias, fqdn))
+        self.connection.commit()
+
+    def services_delete_service(self, id_service):
+
+        self.cursor.execute(f"delete from services where id_service={id_service}")
+        self.connection.commit()
+
+    def services_update_service(self, id_service, **kwargs):
+
+        for key, value in kwargs.items():
+            
+            value_refactored = f"'{value}'" if isinstance(value, str) else value
+
+            self.cursor.execute(f"update services set {key}={value_refactored} where id_service={id_service}")
             self.connection.commit()
 
     def roles_get_all(self):
@@ -187,7 +212,42 @@ class Database:
             self.cursor.execute(f"delete from user_devices where id_user={id_user} and id_device={id_device}")
             self.connection.commit()
 
+    def services_is_assigned_to_user(self, id_user, id_service):
 
+        self.cursor.execute(f"select services.id_service \
+                              from user_permissions right join services on user_services.id_service=services.id_service \
+                              where id_user={id_user} and services.id_service={id_service}")
+        return len(self.cursor.fetchall()) > 0
+
+    def services_get_by_user(self, id_user):
+
+        self.cursor.execute(f"select services.id_service, services.alias, services.fqdn \
+                              from user_services right join services on user_services.id_service=services.id_service \
+                              where id_user={id_user};")
+        return self.cursor.fetchall()
+
+    def serivces_get_by_alias(self, alias):
+
+        self.cursor.execute(f"select services.id_service \
+                              from user_services right join services on user_services.id_service=services.id_service \
+                              where services.alias='{alias}'")
+        return self.cursor.fetchall()
+
+    def services_add_to_user(self, id_user, id_service):
+
+        if self.roles_is_assigned_to_user(id_user, id_service):
+            
+            return
+        
+        self.cursor.execute("insert into user_services (id_user,id_service) values(?,?)", (id_user, id_service))
+        self.connection.commit()
+
+    def services_del_from_user(self, id_user, id_service):
+
+        if self.services_is_assigned_to_user(id_user, id_service):
+
+            self.cursor.execute(f"delete from user_services where id_user={id_user} and id_service={id_service}")
+            self.connection.commit()
 
 database = Database()
 
