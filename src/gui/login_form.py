@@ -14,11 +14,14 @@ class LoginWindow():
 
         self.parent.title("Login to AdminDoc")
         
-        username_label = tk.Label(self.login_box, text="Email:", pady=3)
+        username_label = tk.Label(self.login_box, text="Логин:", pady=3)
         username_label.pack()
 
         self.username_entry = tk.Entry(self.login_box)
         self.username_entry.pack()
+        self.username_entry.bind('<FocusIn>', self.on_entry_click)
+        self.username_entry.bind('<FocusOut>', self.on_focusout)
+        self.username_entry.insert(0, 'email@mail.com')
 
         password_label = tk.Label(self.login_box, text="Пароль:",pady=3)
         password_label.pack()
@@ -35,6 +38,18 @@ class LoginWindow():
 
         self.login_box.place(in_=self.parent, anchor="c", relx=.5, rely=.5)
 
+    def on_entry_click(self, event):
+
+        """function that gets called whenever entry is clicked"""
+        if self.username_entry.get() == 'email@mail.com':
+            self.username_entry.delete(0, "end") # delete all the text in the entry
+            self.username_entry.insert(0, '') #Insert blank for user input
+            self.username_entry.config(fg = 'black')
+
+    def on_focusout(self, event):
+        if self.username_entry.get() == '':
+            self.username_entry.insert(0, 'email@mail.com')
+            self.username_entry.config(fg = 'grey')
 
     def validate_login(self):
 

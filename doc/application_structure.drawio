@@ -1,0 +1,67 @@
+<mxfile host="app.diagrams.net" modified="2024-06-02T22:44:05.808Z" agent="Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/125.0.0.0 Safari/537.36" etag="HGDaYWSz9MT2fhEvvjIE" version="24.4.13" type="device">
+  <diagram name="Page-1" id="Vrwgzq4pjg3D621rUnQr">
+    <mxGraphModel dx="1211" dy="609" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="aoeDnrVam0pq9J4lQuIg-21" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="aoeDnrVam0pq9J4lQuIg-1" target="aoeDnrVam0pq9J4lQuIg-2">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="aoeDnrVam0pq9J4lQuIg-1" value="Страница аутентификации" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="365" y="80" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="aoeDnrVam0pq9J4lQuIg-20" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="aoeDnrVam0pq9J4lQuIg-2" target="aoeDnrVam0pq9J4lQuIg-19">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="aoeDnrVam0pq9J4lQuIg-2" value="Главная страница приложения" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="365" y="160" width="120" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="aoeDnrVam0pq9J4lQuIg-3" value="Вкладка &quot;Пользователи&quot;" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="130" y="230" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="aoeDnrVam0pq9J4lQuIg-4" value="Вкладка &quot;Устройства&quot;" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="285" y="230" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="aoeDnrVam0pq9J4lQuIg-5" value="Вкладка &quot;Роли&quot;" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="440" y="230" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="aoeDnrVam0pq9J4lQuIg-6" value="Вкладка &quot;Сервисы&quot;" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="600" y="230" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="aoeDnrVam0pq9J4lQuIg-7" value="Окно добавления пользователя" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="130" y="300" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="aoeDnrVam0pq9J4lQuIg-8" value="Окно добавления устройства" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="285" y="300" width="120" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="aoeDnrVam0pq9J4lQuIg-11" value="Окно добавления сервиса" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="600" y="300" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="aoeDnrVam0pq9J4lQuIg-12" value="Окно добавления связи между сущностями" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="285" y="360" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="aoeDnrVam0pq9J4lQuIg-13" value="Окно добавления связи между сущностями" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="600" y="370" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="aoeDnrVam0pq9J4lQuIg-14" value="Окно добавления связи между сущностями" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="440" y="300" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="aoeDnrVam0pq9J4lQuIg-15" value="" style="rounded=0;whiteSpace=wrap;html=1;fillColor=none;dashed=1;" vertex="1" parent="1">
+          <mxGeometry x="120" y="295" width="140" height="75" as="geometry" />
+        </mxCell>
+        <mxCell id="aoeDnrVam0pq9J4lQuIg-16" value="" style="rounded=0;whiteSpace=wrap;html=1;fillColor=none;dashed=1;" vertex="1" parent="1">
+          <mxGeometry x="275" y="295" width="140" height="135" as="geometry" />
+        </mxCell>
+        <mxCell id="aoeDnrVam0pq9J4lQuIg-17" value="" style="rounded=0;whiteSpace=wrap;html=1;fillColor=none;dashed=1;" vertex="1" parent="1">
+          <mxGeometry x="430" y="295" width="140" height="75" as="geometry" />
+        </mxCell>
+        <mxCell id="aoeDnrVam0pq9J4lQuIg-18" value="" style="rounded=0;whiteSpace=wrap;html=1;fillColor=none;dashed=1;" vertex="1" parent="1">
+          <mxGeometry x="590" y="295" width="140" height="145" as="geometry" />
+        </mxCell>
+        <mxCell id="aoeDnrVam0pq9J4lQuIg-19" value="" style="rounded=0;whiteSpace=wrap;html=1;fillColor=none;dashed=1;" vertex="1" parent="1">
+          <mxGeometry x="110" y="220" width="640" height="240" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
